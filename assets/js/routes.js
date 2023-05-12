@@ -1,8 +1,10 @@
-import { getMovieByTitle } from "./movie.js";
-
+import { getMovieByTitle, getMovieByGenre } from "./movie.js";
+import { genresMap } from "./genres.js";
 export const router = new Navigo("/", true);
 
 const $main = document.querySelector("#root");
+
+const history = window.history;
 
 export function initRouter() {
   let { href: currentURL, origin: host } = window.location;
@@ -32,6 +34,22 @@ export function initRouter() {
           });
       }
     }
+  });
+  // Ruta: listar peliculas por genero - id
+  router.on("/genre/:genre", ({ data }) => {
+    console.log(data);
+    if (!data) {
+      $main.textContent = "";
+      $main.innerHTML = '<h2 style="margin-top: 100px">Sin resultados<h2>';
+      return;
+    }
+    getMovieByGenre("en", data.genre).then((section) => {
+      $main.textContent = "";
+      $main.appendChild(section);
+    });
+    // console.log(genresMap);
+    console.log(data.genre);
+    history.pushState(null, null, `${currentURL}/${genresMap[data.genre]}`);
   });
 
   router.notFound(() => {
