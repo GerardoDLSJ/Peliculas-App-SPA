@@ -1,0 +1,207 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&family=Ubuntu:wght@300;400&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+}
+
+html {
+    font-family: 'Ubuntu', sans-serif;
+}
+
+body {
+    background: #efefef;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    /* TODO: ACTUALIZAR ESTA IMAGEN */
+    /* background: url('../img/living-room-scandinavian-interior-design.jpg') no-repeat center center / cover; */
+    flex-grow: 1;
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+}
+
+h1 {
+    color: white;
+    font-size: 5rem;
+}
+
+:root {
+    --color-primary: #feca52;
+    --text-color: #343434;
+}
+
+.main-nav {
+    background: var(--color-primary);
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    padding: 0 2rem;
+}
+
+.main-nav__menu {
+    height: 100%;
+    display: flex;
+}
+
+.main-nav ul {
+    list-style: none;
+}
+
+.main-nav__menu-item {
+    font-size: 1.75rem;
+    float: left;
+}
+
+.main-nav a{
+    display: block;
+    text-decoration: none;
+    color: var(--text-color);
+}
+
+.main-nav__logo {
+    height: 4.5rem;
+    padding: 0.5rem;
+    box-sizing: border-box;
+}
+.main-nav__logo img{
+    height: 100%;
+}
+
+.main-nav__search, .main-nav__search form{
+    height: 100%;
+}
+
+.main-nav__search form {
+    display: flex;
+    align-items: center;
+}
+
+.main-nav__search input {
+    min-width: 400px;
+    padding: 0.5rem 1rem;
+    font-size: 1.5rem;
+    border-radius: 0.25rem;
+    border: none;
+}
+
+.main-nav__cart {
+    margin-left: auto;
+}
+
+.main-nav__cart span {
+    font-size: 2.5rem;
+}
+
+.main-nav__menu-item a:hover {
+    background-color: #343434;
+    color: var(--color-primary);
+}
+
+.main-nav__menu-item a {
+    padding: 0 2rem;
+    display: block;
+    height: 5rem;
+    line-height: 5rem;
+}
+
+.main-nav__submenu {
+    display: none;
+    min-width: 140px;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.main-nav__submenu a {
+    padding: 0 2rem;
+    font-weight: lighter;
+    color: var(--color-primary);
+}
+.main-nav__submenu a:hover {
+    color: white;
+}
+
+.main-nav__menu-item:hover .main-nav__submenu{
+    display: block;
+}
+
+input:focus {
+    outline: none;
+}
+
+.productos {
+    display: flex;
+    gap: 1rem;
+}
+.producto {
+    flex-basis: 250px; /* width */
+    border-radius: 0.5rem;
+    background-color: white;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.producto img {
+    width: 100%;
+}
+
+.producto-nombre {
+    margin-bottom: 1rem;
+}
+
+.producto-detalle {
+    padding: 1rem;
+    flex-grow: 1;
+}
+
+.producto-descripcion {
+    color: #757575;
+}
+
+.producto-precio {
+    text-align: center;
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+}
+
+.producto footer {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 1rem 1rem;
+}
+
+.btn {
+    border: none;
+    background-color: #feca52;
+    color: #343434;
+    padding: 1rem;
+    font-size: 1rem;
+}
+
+.btn:hover {
+    background-color: #343434;
+    color: #feca52;
+}
+
+.btn-add-cart {
+    flex-grow: 1;
+}
+
+.container-movies{
+   display: flex;
+   justify-content: center; 
+}
+
+.movie-card-img{
+    width: 200px;
+    height: 400px;
+}

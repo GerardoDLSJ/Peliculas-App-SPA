@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
+    />
+    <link rel="stylesheet" href="../assets/css/index.css" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <script src="//unpkg.com/navigo"></script>
+
+    <script defer src="/assets/js/main.js" type="module"></script>
+    <title>Where is this Movie?</title>
+  </head>
+  <body>
+    <header>
+      <nav class="main-nav">
+        <!-- <img src="" alt="logo" class="main-nav__logo" /> --> <!-- //TODO:: ACTUALIZAR LA IMAGEN -->
+        <ul class="main-nav__menu">
+          <li class="main-nav__menu-item">
+            <a href="">Categories</a>
+            <ul class="main-nav__submenu" id="menu-categorias"></ul>
+          </li>
+          <li class="main-nav__menu-item"><a href="/offers" data-navigo>Offers</a></li>
+          <li class="main-nav__menu-item"><a href="/about" data-navigo>About</a></li>
+        </ul>
+        <div class="main-nav__search">
+          <form action="#" id="main-search">
+            <input type="search" name="search" placeholder="Search product" />
+            <input type="submit" hidden />
+          </form>
+        </div>
+        <div class="main-nav__cart">
+          <a href="">
+            <span class="material-symbols-outlined"> shopping_cart </span>
+            <span class="main-nav__cart-count"></span>
+          </a>
+        </div>
+      </nav>
+    </header>
+    <main id="root">
+      <h1>Shoppe</h1>
+      <section class="productos">
+      </section>
+    </main>
+    <!-- ESTE TEMPLATE EN TEORÍA ES EN DONDE SE TIENE QUE CARGAR EL CONTENIDO -->
+    <template id="template-producto">
+      <article class="producto">
+        <img src="https://i.dummyjson.com/data/products/1/thumbnail.jpg" />
+        <!-- <div class="producto-detalle">
+          <h2 class="producto-nombre">Iphone</h2>
+          <p class="producto-descripcion">
+            An apple mobile which is nothing like apple
+          </p>
+        </div>
+        <footer>
+          <p class="producto-precio">2229.22</p>
+          <button class="btn btn-add-cart">Add Cart</button>
+        </footer> -->
+      </article>
+    </template>
+  </body>
+</html>
