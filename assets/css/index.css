@@ -14,28 +14,31 @@ html {
 }
 
 body {
-    background: #efefef;
+    background: var(--color-primary);
     display: flex;
     flex-direction: column;
 }
 
 main {
-    /* TODO: ACTUALIZAR ESTA IMAGEN */
-    /* background: url('../img/living-room-scandinavian-interior-design.jpg') no-repeat center center / cover; */
+    background: linear-gradient(to top, rgba(30,35,38,.6), rgba(30,35,38,.9)), url(../img/baner.png);
+    background-size: 100%;
     flex-grow: 1;
     flex-direction: column;
     display: flex;
     align-items: center;
 }
+img{
+    height: 100vh;
+}
 
 h1 {
-    color: white;
+    color: rgb(0, 0, 0);
     font-size: 5rem;
 }
 
 :root {
-    --color-primary: #feca52;
-    --text-color: #343434;
+    --color-primary: #000000;
+    --text-color: #ffffff;
 }
 
 .main-nav {
@@ -46,6 +49,7 @@ h1 {
     padding: 0 2rem;
 }
 
+    /* MENU DE NAVEGACION*/
 .main-nav__menu {
     height: 100%;
     display: flex;
@@ -67,16 +71,18 @@ h1 {
 }
 
 .main-nav__logo {
-    height: 4.5rem;
-    padding: 0.5rem;
+    height: 4rem;
+    padding: 0rem;
     box-sizing: border-box;
 }
 .main-nav__logo img{
     height: 100%;
 }
 
+    /* Barra de busqueda */
 .main-nav__search, .main-nav__search form{
     height: 100%;
+    margin-left: auto;
 }
 
 .main-nav__search form {
@@ -92,14 +98,6 @@ h1 {
     border: none;
 }
 
-.main-nav__cart {
-    margin-left: auto;
-}
-
-.main-nav__cart span {
-    font-size: 2.5rem;
-}
-
 .main-nav__menu-item a:hover {
     background-color: #343434;
     color: var(--color-primary);
@@ -112,17 +110,23 @@ h1 {
     line-height: 5rem;
 }
 
+    /* Menu desplegable */
 .main-nav__submenu {
     display: none;
     min-width: 140px;
     position: absolute;
-    background-color: rgba(0, 0, 0, 0.6);
+    border-radius:  10px;
+    background-color: rgba(0, 0, 0, 0.9);
+    max-height: 80%;
+    overflow-y: scroll;
 }
 
 .main-nav__submenu a {
-    padding: 0 2rem;
+    padding: 0 1rem;
     font-weight: lighter;
-    color: var(--color-primary);
+    color: red;
+    font-weight: 500;
+    height: auto;
 }
 .main-nav__submenu a:hover {
     color: white;

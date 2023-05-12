@@ -39,7 +39,7 @@ const renderMovies = (movies) => {
   for (const movie of movies) {
     const $clonArticle = $template.content.cloneNode(true);
 
-    $clonArticle.querySelector("img").src = movie.backdropURLs.original;
+    $clonArticle.querySelector("img").src = movie.posterURLs.original;
 
     // $clonArticle.querySelector(".producto-nombre").textContent = movie.title;
 

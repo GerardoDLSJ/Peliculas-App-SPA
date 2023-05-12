@@ -10,40 +10,32 @@
     />
     <link rel="stylesheet" href="../assets/css/index.css" />
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-
     <script src="//unpkg.com/navigo"></script>
-
     <script defer src="/assets/js/main.js" type="module"></script>
     <title>Where is this Movie?</title>
+    <link rel="icon" type="image/png" href="../Peliculas-App-SPA/assets/img/logo pagina de cine.png" />
   </head>
   <body>
     <header>
       <nav class="main-nav">
-        <!-- <img src="" alt="logo" class="main-nav__logo" /> --> <!-- //TODO:: ACTUALIZAR LA IMAGEN -->
+        <img src="assets/img/logoPrincipal.png" alt="logo" class="main-nav__logo" />
         <ul class="main-nav__menu">
           <li class="main-nav__menu-item">
             <a href="">Categories</a>
             <ul class="main-nav__submenu" id="menu-categorias"></ul>
           </li>
-          <li class="main-nav__menu-item"><a href="/offers" data-navigo>Offers</a></li>
-          <li class="main-nav__menu-item"><a href="/about" data-navigo>About</a></li>
         </ul>
         <div class="main-nav__search">
           <form action="#" id="main-search">
-            <input type="search" name="search" placeholder="Search product" />
+            <input type="search" name="search" placeholder= "Search Movie" />
             <input type="submit" hidden />
           </form>
         </div>
-        <div class="main-nav__cart">
-          <a href="">
-            <span class="material-symbols-outlined"> shopping_cart </span>
-            <span class="main-nav__cart-count"></span>
-          </a>
-        </div>
+
       </nav>
     </header>
     <main id="root">
-      <h1>Shoppe</h1>
+      <h1>Movies</h1>
       <section class="productos">
       </section>
     </main>
