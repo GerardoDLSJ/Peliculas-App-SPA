@@ -37,9 +37,15 @@ const renderMovies = (movies) => {
   const $template = document.querySelector("#template-producto");
 
   for (const movie of movies) {
+    // INFORMACIÓN DE CADA PELICULA PARA EL HOVER
+    const { title, year, runtime, overview, cast } = movie;
+
+    // STRING DE LOS ACTORES:  NOMBRE1, NOMBRE2, NOMBRE A LA N AL CCUADRADO
+    const castActors = cast.join(", ");
+
     const $clonArticle = $template.content.cloneNode(true);
 
-    $clonArticle.querySelector("img").src = movie.backdropURLs.original;
+    $clonArticle.querySelector("img").src = movie.posterURLs.original;
 
     // $clonArticle.querySelector(".producto-nombre").textContent = movie.title;
 
@@ -63,7 +69,8 @@ export const getMovieByGenre = async (lang, genreId) => {
   try {
     const response = await fetch(urlByGenre, options);
     const result = await response.json();
-    console.log(result.result);
+    console.log(result);
+    return renderMovies(result.result);
   } catch (error) {
     throw new Error("Error en la elección de categorias");
   }
