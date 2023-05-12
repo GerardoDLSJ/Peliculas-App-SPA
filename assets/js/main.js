@@ -8,6 +8,7 @@ window.addEventListener("DOMContentLoaded", () => {
   addListeners();
   //Inicio las rutas
   initRouter();
+  // Comprobar si hay peliculas en el inicio
 });
 
 function addListeners() {

@@ -52,6 +52,9 @@ export function initRouter() {
     history.pushState(null, null, `${currentURL}/${genresMap[data.genre]}`);
   });
 
+  // Ruta info imagen
+  router.on("/movie/:id", () => {});
+
   router.notFound(() => {
     document.querySelector("main").innerHTML =
       '<h2 style="margin-top: 100px">Page not found<h2>';

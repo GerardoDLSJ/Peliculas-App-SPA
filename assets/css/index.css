@@ -21,7 +21,7 @@ body {
 
 main {
     background: linear-gradient(to top, rgba(30,35,38,.6), rgba(30,35,38,.9)), url(../img/baner.png);
-    background-size: 100%;
+ 
     flex-grow: 1;
     flex-direction: column;
     display: flex;

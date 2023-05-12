@@ -1,5 +1,6 @@
 import { options } from "./options.js";
 import { router } from "./routes.js";
+import { saveMovies } from "./bd.js";
 
 export const searchMovie = (event) => {
   event.preventDefault();
@@ -21,7 +22,7 @@ export const getMovieByTitle = async (title = "", lang = "en") => {
       console.log("No encontrado");
       return;
     }
-
+    saveMovies(result.result, "movies");
     return renderMovies(result.result);
   } catch (error) {
     throw new Error("No se pudo encontrar la pelicula especificada");
