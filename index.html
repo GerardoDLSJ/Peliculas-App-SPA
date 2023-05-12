@@ -18,7 +18,7 @@
   <body>
     <header>
       <nav class="main-nav">
-        <img src="assets/img/logoPrincipal.png" alt="logo" class="main-nav__logo" />
+        <img src="/assets/img/logoPrincipal.png" alt="logo" class="main-nav__logo" />
         <ul class="main-nav__menu">
           <li class="main-nav__menu-item">
             <a href="">Categories</a>
@@ -27,21 +27,20 @@
         </ul>
         <div class="main-nav__search">
           <form action="#" id="main-search">
-            <input type="search" name="search" placeholder= "Search Movie" />
+            <input type="search" name="search" placeholder= "&#xe8b6;&nbsp; Search Movie" style="font-family:'Ubuntu', sans-serif, 'Material Symbols Outlined'"/>
             <input type="submit" hidden />
           </form>
         </div>
-
       </nav>
     </header>
     <main id="root">
-      <h1>Movies</h1>
+      <h1>Top Movies</h1>
       <section class="productos">
       </section>
     </main>
     <!-- ESTE TEMPLATE EN TEORÍA ES EN DONDE SE TIENE QUE CARGAR EL CONTENIDO -->
     <template id="template-producto">
-      <article class="producto">
+      <article class="movie">
         <img src="https://i.dummyjson.com/data/products/1/thumbnail.jpg" />
         <!-- <div class="producto-detalle">
           <h2 class="producto-nombre">Iphone</h2>
@@ -53,6 +52,7 @@
           <p class="producto-precio">2229.22</p>
           <button class="btn btn-add-cart">Add Cart</button>
         </footer> -->
+        
       </article>
     </template>
   </body>

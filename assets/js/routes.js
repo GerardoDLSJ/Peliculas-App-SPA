@@ -49,7 +49,7 @@ export function initRouter() {
     });
     // console.log(genresMap);
     console.log(data.genre);
-    history.pushState(null, null, `${currentURL}/${genresMap[data.genre]}`);
+    // history.pushState(null, null, `${currentURL}/${genresMap[data.genre]}`);
   });
 
   // Ruta info imagen

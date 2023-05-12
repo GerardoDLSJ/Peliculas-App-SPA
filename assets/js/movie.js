@@ -32,8 +32,8 @@ export const getMovieByTitle = async (title = "", lang = "en") => {
 const renderMovies = (movies) => {
   const fragment = document.createDocumentFragment();
 
-  const $sectionMovies = document.createElement("section");
-  $sectionMovies.classList.add("productos");
+  const $sectionMovies = document.createElement("div");
+  $sectionMovies.classList.add("container-movies");
 
   const $template = document.querySelector("#template-producto");
 
@@ -43,6 +43,13 @@ const renderMovies = (movies) => {
 
     // STRING DE LOS ACTORES:  NOMBRE1, NOMBRE2, NOMBRE A LA N AL CCUADRADO
     const castActors = cast.join(", ");
+
+    const divInfo = document.createElement("div");
+
+    divInfo.innerHTML = `
+                  <h3>${title}</h3>
+    
+    `;
 
     const $clonArticle = $template.content.cloneNode(true);
 

@@ -20,20 +20,20 @@ body {
 }
 
 main {
-    background: linear-gradient(to top, rgba(30,35,38,.6), rgba(30,35,38,.9)), url(../img/baner.png);
- 
+    background: linear-gradient(to top, rgba(30,35,38,.6), rgba(30,35,38,.9)), url(../img/baner1.jpg);
+    background-size: 100%;
     flex-grow: 1;
     flex-direction: column;
     display: flex;
-    align-items: center;
+    padding: 3rem;
 }
 img{
     height: 100vh;
 }
 
 h1 {
-    color: rgb(0, 0, 0);
-    font-size: 5rem;
+    color: var(--text-color);
+    font-size: 2.5rem;
 }
 
 :root {
@@ -94,8 +94,10 @@ h1 {
     min-width: 400px;
     padding: 0.5rem 1rem;
     font-size: 1.5rem;
-    border-radius: 0.25rem;
-    border: none;
+    border-radius: 0.5rem;
+    border-color: #ffffff;
+    color: #ffffff;
+    background-color: transparent;
 }
 
 .main-nav__menu-item a:hover {
@@ -202,10 +204,32 @@ input:focus {
 
 .container-movies{
    display: flex;
-   justify-content: center; 
+   justify-content: space-between;
+   gap: 1rem;
+   flex-wrap: wrap;
 }
 
-.movie-card-img{
+
+
+.movie{
     width: 200px;
-    height: 400px;
+    height: 300px;
 }
+
+.movie:hover{
+    transform: scale(1.05);
+    transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.movie img{
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.movie-info{
+    position: absolute;
+    width: 200px;
+    height: 300px;
+}
+
+
