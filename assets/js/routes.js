@@ -1,4 +1,9 @@
-import { getMovieByTitle, getMovieByGenre } from "./movie.js";
+import {
+  getMovieByTitle,
+  getMovieByGenre,
+  renderMovieById,
+  renderLastSearch,
+} from "./movie.js";
 import { genresMap } from "./genres.js";
 export const router = new Navigo("/", true);
 
@@ -15,8 +20,7 @@ export function initRouter() {
   console.log("currentPath", currentPath);
 
   router.on("/", () => {
-    document.querySelector("main").innerHTML =
-      '<h2 style="margin-top: 100px">Inicio<h2>';
+    $main.innerHTML = renderLastSearch();
   });
 
   // Primera ruta find
@@ -53,7 +57,15 @@ export function initRouter() {
   });
 
   // Ruta info imagen
-  router.on("/movie/:id", () => {});
+  router.on("/movie/:id", ({ data }) => {
+    if (!data) {
+      $main.textContent = "";
+      $main.innerHTML = '<h2 style="margin-top: 100px">Ocurrió un error<h2>';
+      return;
+    }
+
+    $main.innerHTML = renderMovieById(data.id);
+  });
 
   router.notFound(() => {
     document.querySelector("main").innerHTML =
