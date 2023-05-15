@@ -1,4 +1,4 @@
-const APIKEY = "d23af0c798msh9d78ed28989414ep1fb888jsnf71721dfcc91";
+const APIKEY = "11f4104862msh9820596d4fdd784p1f0106jsn92b1df09b3ef";
 
 export const options = {
   method: "GET",

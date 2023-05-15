@@ -12,6 +12,7 @@ const $main = document.querySelector("#root");
 const history = window.history;
 
 export function initRouter() {
+  $('[data-bs-toggle="popover"]').popover("destroy");
   let { href: currentURL, origin: host } = window.location;
   console.log("currentURL", currentURL);
   console.log("host", host);
@@ -21,6 +22,7 @@ export function initRouter() {
 
   router.on("/", () => {
     $main.innerHTML = renderLastSearch();
+    
   });
 
   // Primera ruta find
@@ -32,6 +34,7 @@ export function initRouter() {
           .then((section) => {
             $main.textContent = "";
             $main.appendChild(section);
+            $('[data-bs-toggle="popover"]').popover();
           })
           .catch((err) => {
             console.log("No se pudo cargar la ruta");
@@ -50,7 +53,9 @@ export function initRouter() {
     getMovieByGenre("en", data.genre).then((section) => {
       $main.textContent = "";
       $main.appendChild(section);
+      $('[data-bs-toggle="popover"]').popover();
     });
+    
     // console.log(genresMap);
     console.log(data.genre);
     // history.pushState(null, null, `${currentURL}/${genresMap[data.genre]}`);
@@ -73,4 +78,8 @@ export function initRouter() {
   });
 
   router.resolve(currentPath);
+  //$('[data-bs-toggle="popover"]').popover("destroy")
+  console.log("popover")
+  
+  $('[data-bs-toggle="popover"]').popover();
 }

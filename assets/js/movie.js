@@ -59,7 +59,7 @@ const renderMovies = (movies = []) => {
 
   movies.forEach((movie, index) => {
     const link = document.createElement("a");
-
+    
     link.setAttribute("href", `/movie/${index + 1}`);
 
     // INFORMACIÓN DE CADA PELICULA PARA EL HOVER
@@ -68,32 +68,30 @@ const renderMovies = (movies = []) => {
     // STRING DE LOS ACTORES:  NOMBRE1, NOMBRE2, NOMBRE A LA N AL CCUADRADO
     const castActors = cast.join(", ");
 
-    const divInfo = document.createElement("div");
-
-    divInfo.innerHTML = `
-                  <h3>${title}</h3>
-    
-    `;
-
     const $clonArticle = $template.content.cloneNode(true);
-
     $clonArticle.querySelector("img").src =
       movie.posterURLs[342] ?? "/assets/img/icon-image-not-found-vector.webp";
+      $clonArticle.querySelector('article').setAttribute('data-bs-content',
+        ` <div class='container-hover'>  
+            <h3>${title}</h3>  
+            <div class='details-datetime-hover'>
+              <p>${year}</p>
+              <p>${runtime} min</p>
+            </div>
+            <div class='overview_hover'>
+              <span>${overview}</span>
+            </div>
+            <p class='castActors_hover'>Actors: ${castActors}</p>
+          </div>
+      `
+      )
+;
 
-    // $clonArticle.querySelector(".producto-nombre").textContent = movie.title;
-
-    // $clonArticle.querySelector(".producto-descripcion").textContent =
-    //   movie.overview;
-
-    // $clonArticle.querySelector(".producto-precio").textContent =
-    //   "$ " + producto.price;
     link.appendChild($clonArticle);
-
     fragment.appendChild(link);
   });
 
   $sectionMovies.appendChild(fragment);
-
   return $sectionMovies;
 };
 
@@ -141,24 +139,23 @@ export const renderMovieById = (id) => {
                 <span>${genresList}</span>
               </div>
             </div>
-          <p class='overview'>${overview}</p>
+            <div class='fullinfo-overview'>
+            <p class='overview'>${overview}</p>
+            </div>
           <h3>Disponible en:</h3>
           <div class='container-platforms'>
             ${streamingPlatforms(streamingInfo.us).innerHTML}
           </div>
       </div>
       <div class="full-info-resources">
-        <div>
-          <img src="${
+          <img style="height: 100%; width: 100%;""  src="${
             backdropURLs.original ??
             "/assets/img/icon-image-not-found-vector.webp"
           }" />
-          <iframe class="hidden" width="560" height="315"  src="https://www.youtube.com/embed/${youtubeTrailerVideoId}?autoplay=1&mute=1&loop=1" frameborder="0" allowfullscreen></iframe>
+          <iframe class="hidden" width="100%" height="100%"  src="https://www.youtube.com/embed/${youtubeTrailerVideoId}?autoplay=1&mute=1&loop=1" frameborder="0" allowfullscreen></iframe>
 
-        </div>
       </div>
     </section>
-  
   `;
 };
 
@@ -202,17 +199,22 @@ export const getMovieByGenre = async (lang, genreId) => {
   } catch (error) {
     throw new Error("Error en la elección de categorias");
   }
+  getMovieByTitle
 };
 
 export function renderLastSearch() {
   const lastSearch = getFromBD("movies");
+  const $titleRenderLastSearch = document.querySelector("#search-result");
+  $titleRenderLastSearch.innerHTML = `Last Results:`
 
   if (!lastSearch) {
     return `<h1>You have not performed a search yet</h1>`;
   }
   return `
-          <h1>Last Results:</h1>
           <div class="container-movies">
                 ${renderMovies(lastSearch).innerHTML}
           </div>`;
 }
+// $(function () {
+//   $('[data-bs-toggle="popover"]').popover();
+// })
