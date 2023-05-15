@@ -1,5 +1,10 @@
-import { getMovieByTitle, getMovieByGenre } from "./movie.js";
-import { genresMap } from "./genres.js";
+import {
+  getMovieByTitle,
+  getMovieByGenre,
+  renderMovieById,
+  renderLastSearch,
+} from "./movie.js";
+import { genresMap, selectRandomMovies } from "./genres.js";
 export const router = new Navigo("/", true);
 
 const $main = document.querySelector("#root");
@@ -7,20 +12,25 @@ const $main = document.querySelector("#root");
 const history = window.history;
 
 export function initRouter() {
+  $('[data-bs-toggle="popover"]').popover("destroy");
   let { href: currentURL, origin: host } = window.location;
-  console.log("currentURL", currentURL);
-  console.log("host", host);
 
   let currentPath = currentURL.replace(host, "");
-  console.log("currentPath", currentPath);
 
   router.on("/", () => {
-    document.querySelector("main").innerHTML =
-      '<h2 style="margin-top: 100px">Inicio<h2>';
+    $main.innerHTML = renderLastSearch();
   });
 
-  // Primera ruta find
-  router.on("/find", ({ data, params, queryString }) => {
+  // Carga peliculas aleatorias
+  router.on("/index.html", () => {
+    selectRandomMovies().then((result) => {
+      $main.appendChild(result);
+      $('[data-bs-toggle="popover"]').popover();
+    });
+  });
+
+  // Primera ruta search
+  router.on("/search", ({ data, params, queryString }) => {
     if (params) {
       if (params.q) {
         let search = params.q;
@@ -28,6 +38,7 @@ export function initRouter() {
           .then((section) => {
             $main.textContent = "";
             $main.appendChild(section);
+            $('[data-bs-toggle="popover"]').popover();
           })
           .catch((err) => {
             console.log("No se pudo cargar la ruta");
@@ -37,7 +48,6 @@ export function initRouter() {
   });
   // Ruta: listar peliculas por genero - id
   router.on("/genre/:genre", ({ data }) => {
-    console.log(data);
     if (!data) {
       $main.textContent = "";
       $main.innerHTML = '<h2 style="margin-top: 100px">Sin resultados<h2>';
@@ -46,14 +56,20 @@ export function initRouter() {
     getMovieByGenre("en", data.genre).then((section) => {
       $main.textContent = "";
       $main.appendChild(section);
+      $('[data-bs-toggle="popover"]').popover();
     });
-    // console.log(genresMap);
-    console.log(data.genre);
-    history.pushState(null, null, `${currentURL}/${genresMap[data.genre]}`);
   });
 
   // Ruta info imagen
-  router.on("/movie/:id", () => {});
+  router.on("/movie/:id", ({ data }) => {
+    if (!data) {
+      $main.textContent = "";
+      $main.innerHTML = '<h2 style="margin-top: 100px">Ocurrió un error<h2>';
+      return;
+    }
+
+    $main.innerHTML = renderMovieById(data.id);
+  });
 
   router.notFound(() => {
     document.querySelector("main").innerHTML =
@@ -61,4 +77,7 @@ export function initRouter() {
   });
 
   router.resolve(currentPath);
+  //$('[data-bs-toggle="popover"]').popover("destroy")
+
+  $('[data-bs-toggle="popover"]').popover();
 }

@@ -6,5 +6,5 @@ export function saveMovies(data, key) {
 
 export function getFromBD(key) {
   const result = JSON.parse(localStorage.getItem(key));
-  console.log(result);
+  return result;
 }

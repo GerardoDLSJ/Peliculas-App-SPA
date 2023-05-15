@@ -1,37 +1,9 @@
+import { getMovieByGenre } from "./movie.js";
 import { options } from "./options.js";
 
 const urlGenres = "https://streaming-availability.p.rapidapi.com/v2/genres";
 
-export let genresMap = {
-  1: "Biography",
-  2: "Film Noir",
-  3: "Game Show",
-  4: "Musical",
-  5: "Sport",
-  6: "Short",
-  7: "Adult",
-  12: "Adventure",
-  14: "Fantasy",
-  16: "Animation",
-  18: "Drama",
-  27: "Horror",
-  28: "Action",
-  35: "Comedy",
-  36: "History",
-  37: "Western",
-  53: "Thriller",
-  80: "Crime",
-  99: "Documentary",
-  878: "Science Fiction",
-  9648: "Mystery",
-  10402: "Music",
-  10749: "Romance",
-  10751: "Family",
-  10752: "War",
-  10763: "News",
-  10764: "Reality",
-  10767: "Talk Show",
-};
+export let genresMap = {};
 
 // Fetch para extraer los generos
 export const getGenres = async () => {
@@ -39,6 +11,8 @@ export const getGenres = async () => {
     const response = await fetch(urlGenres, options);
 
     const result = await response.json();
+
+    genresMap = result.result;
 
     listGenres(result.result);
   } catch (error) {
@@ -67,3 +41,18 @@ function listGenres(list) {
 
   $lista.appendChild($fragment);
 }
+
+export const selectRandomMovies = async () => {
+  const response = await fetch(urlGenres, options);
+
+  const result = await response.json();
+
+  genresMap = result.result;
+
+  const elements = Object.keys(genresMap);
+
+  // Selecciona un genere
+  const genreRandom = elements[Math.floor(Math.random() * elements.length)]; // seleccionamos un elemento aleatorio del arreglo
+
+  return getMovieByGenre("en", genreRandom); // imprimimos el elemento aleatorio seleccionado
+};
