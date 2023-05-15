@@ -21,7 +21,7 @@ export const searchMovie = (event) => {
   const search = event.target.search.value;
   document.title = search;
 
-  router.navigate(`/find?q=${search}`);
+  router.navigate(`/search?q=${search}`);
 };
 
 // TODO: Cargar información completa de la película --> Pagina entera
@@ -141,7 +141,7 @@ export const renderMovieById = (id) => {
             <div class='fullinfo-overview'>
             <p class='overview'>${overview}</p>
             </div>
-          <h3>Disponible en:</h3>
+          <h3>Available in:</h3>
           <div class='container-platforms'>
             ${streamingPlatforms(streamingInfo.us).innerHTML}
           </div>

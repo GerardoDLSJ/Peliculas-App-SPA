@@ -24,13 +24,13 @@ export function initRouter() {
   // Carga peliculas aleatorias
   router.on("/index.html", () => {
     selectRandomMovies().then((result) => {
-      $main.appendChild(result); 
+      $main.appendChild(result);
       $('[data-bs-toggle="popover"]').popover();
     });
   });
 
-  // Primera ruta find
-  router.on("/find", ({ data, params, queryString }) => {
+  // Primera ruta search
+  router.on("/search", ({ data, params, queryString }) => {
     if (params) {
       if (params.q) {
         let search = params.q;
