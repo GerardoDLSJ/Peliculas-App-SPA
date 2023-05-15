@@ -72,6 +72,7 @@ export function initRouter() {
       return;
     }
     $main.innerHTML = renderMovieById(data.id);
+    document.querySelector(".popover").remove();
     $title.textContent = "";
   });
 
@@ -88,13 +89,14 @@ export function initRouter() {
 }
 // Evitar que se recargue;
 function notReload() {
+  console.log("hola");
   const anchors = document.querySelectorAll(".container-movies a");
   for (var i = 0; i < anchors.length; i++) {
     var anchor = anchors[i];
     if (anchor.hasAttribute("href")) {
       anchor.addEventListener("click", function (event) {
-        $('[data-bs-toggle="popover"]').popover("destroy");
         event.preventDefault();
+        // $('[data-bs-toggle="popover"]').popover("destroy");
         let { origin: host } = window.location;
         let currentPath = this.href.replace(host, "");
         router.navigate(currentPath);

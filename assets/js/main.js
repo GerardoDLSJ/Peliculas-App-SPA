@@ -8,6 +8,7 @@ const timeInactive = 2000; // 4 segundos
 let temp;
 
 window.addEventListener("DOMContentLoaded", () => {
+  router.navigate("/");
   // Carga los generos en el menu y los despliega con el hover
   getGenres();
   // Añade el evento para detectar un submit en la parte de la barra de busqueda (el dar enter)
