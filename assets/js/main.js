@@ -10,12 +10,12 @@ let temp;
 window.addEventListener("DOMContentLoaded", () => {
   //Inicio las rutas
   initRouter();
-
-  router.navigate("/");
   // Carga los generos en el menu y los despliega con el hover
   getGenres();
   // Añade el evento para detectar un submit en la parte de la barra de busqueda (el dar enter)
   addListeners();
+
+  router.navigate("/");
 });
 
 export function addListeners() {
