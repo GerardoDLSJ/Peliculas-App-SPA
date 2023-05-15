@@ -5,12 +5,12 @@ import {
   renderLastSearch,
 } from "./movie.js";
 import { genresMap, selectRandomMovies } from "./genres.js";
+import { addListeners } from "./main.js";
 export const router = new Navigo("/", true);
 
 const $main = document.querySelector("#root");
-
 const history = window.history;
-
+const $title = document.querySelector("#search-result");
 export function initRouter() {
   $('[data-bs-toggle="popover"]').popover("destroy");
   let { href: currentURL, origin: host } = window.location;
@@ -19,6 +19,7 @@ export function initRouter() {
 
   router.on("/", () => {
     $main.innerHTML = renderLastSearch();
+    notReload();
   });
 
   // Carga peliculas aleatorias
@@ -26,6 +27,7 @@ export function initRouter() {
     selectRandomMovies().then((result) => {
       $main.appendChild(result);
       $('[data-bs-toggle="popover"]').popover();
+      notReload();
     });
   });
 
@@ -57,6 +59,7 @@ export function initRouter() {
       $main.textContent = "";
       $main.appendChild(section);
       $('[data-bs-toggle="popover"]').popover();
+      notReload();
     });
   });
 
@@ -69,7 +72,7 @@ export function initRouter() {
     }
 
     $main.innerHTML = renderMovieById(data.id);
-    notReload();
+    $title.textContent = "";
   });
 
   router.notFound(() => {
@@ -81,23 +84,20 @@ export function initRouter() {
   //$('[data-bs-toggle="popover"]').popover("destroy")
 
   $('[data-bs-toggle="popover"]').popover();
-  router.navigate(currentPath);
-
-  function notReload() {
-    document.addEventListener("click", function (event) {
-      // Si el elemento clickeado es un anchor, prevenir la acción por defecto
-      if (
-        event.target.tagName === "A" ||
-        event.target.tagName === "DIV" ||
-        event.target.tagName === "MAIN"
-      ) {
+  // router.navigate(currentPath);
+}
+// Evitar que se recargue;
+function notReload() {
+  const anchors = document.querySelectorAll(".container-movies a");
+  for (var i = 0; i < anchors.length; i++) {
+    var anchor = anchors[i];
+    if (anchor.hasAttribute("href")) {
+      anchor.addEventListener("click", function (event) {
         event.preventDefault();
         let { origin: host } = window.location;
-        console.log(host);
-        let currentPath = event.target.href.replace(host, "");
-        console.log(currentPath);
+        let currentPath = this.href.replace(host, "");
         router.navigate(currentPath);
-      }
-    });
+      });
+    }
   }
 }

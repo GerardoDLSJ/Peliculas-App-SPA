@@ -16,7 +16,7 @@ window.addEventListener("DOMContentLoaded", () => {
   initRouter();
 });
 
-function addListeners() {
+export function addListeners() {
   // Selecciono el elemento con el id main-search
   const $formSearch = document.getElementById("main-search");
   // Cuando detecta el submit llama a la función search movie
