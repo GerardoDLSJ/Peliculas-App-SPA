@@ -72,7 +72,9 @@ export function initRouter() {
       return;
     }
     $main.innerHTML = renderMovieById(data.id);
-    document.querySelector(".popover").remove();
+    if (document.querySelector(".popover")) {
+      document.querySelector(".popover").remove();
+    }
     $title.textContent = "";
   });
 
