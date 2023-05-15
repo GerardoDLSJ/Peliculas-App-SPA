@@ -71,7 +71,6 @@ export function initRouter() {
       $main.innerHTML = '<h2 style="margin-top: 100px">Ocurrió un error<h2>';
       return;
     }
-
     $main.innerHTML = renderMovieById(data.id);
     $title.textContent = "";
   });
@@ -94,6 +93,7 @@ function notReload() {
     var anchor = anchors[i];
     if (anchor.hasAttribute("href")) {
       anchor.addEventListener("click", function (event) {
+        $('[data-bs-toggle="popover"]').popover("destroy");
         event.preventDefault();
         let { origin: host } = window.location;
         let currentPath = this.href.replace(host, "");
