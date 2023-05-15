@@ -15,8 +15,6 @@ window.addEventListener("DOMContentLoaded", () => {
   getGenres();
   // Añade el evento para detectar un submit en la parte de la barra de busqueda (el dar enter)
   addListeners();
-
-  router.navigate("/");
 });
 
 export function addListeners() {
