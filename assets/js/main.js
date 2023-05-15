@@ -8,6 +8,7 @@ const timeInactive = 2000; // 4 segundos
 let temp;
 
 window.addEventListener("DOMContentLoaded", () => {
+  document.title = "UpNechMovies";
   //Inicio las rutas
   initRouter();
   // Carga los generos en el menu y los despliega con el hover
