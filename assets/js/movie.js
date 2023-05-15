@@ -12,6 +12,7 @@ const platformsLink = {
   apple: ["https://tv.apple.com/", "#969C96"],
   peacock: ["https://www.peacocktv.com/", "#e6e600"],
   paramount: ["https://www.paramountplus.com/", "#1d6ff2"],
+  mubi: ["https://mubi.com/es", "#149E8F"],
   undefined: ["https://www.google.com", "#57322"],
 };
 
@@ -34,7 +35,6 @@ export const getMovieByTitle = async (title = "", lang = "en") => {
     const result = await response.json();
 
     if (!result) {
-      console.log("No encontrado");
       return;
     }
     saveMovies(result.result, "movies");
@@ -51,7 +51,7 @@ const updateSearchTitle = (title) => {
 
 const renderMovies = (movies = []) => {
   const fragment = document.createDocumentFragment();
-  console.log(movies);
+
   const $sectionMovies = document.createElement("div");
   $sectionMovies.classList.add("container-movies");
 
@@ -59,7 +59,7 @@ const renderMovies = (movies = []) => {
 
   movies.forEach((movie, index) => {
     const link = document.createElement("a");
-    
+
     link.setAttribute("href", `/movie/${index + 1}`);
 
     // INFORMACIÓN DE CADA PELICULA PARA EL HOVER
@@ -71,8 +71,9 @@ const renderMovies = (movies = []) => {
     const $clonArticle = $template.content.cloneNode(true);
     $clonArticle.querySelector("img").src =
       movie.posterURLs[342] ?? "/assets/img/icon-image-not-found-vector.webp";
-      $clonArticle.querySelector('article').setAttribute('data-bs-content',
-        ` <div class='container-hover'>  
+    $clonArticle.querySelector("article").setAttribute(
+      "data-bs-content",
+      ` <div class='container-hover'>  
             <h3>${title}</h3>  
             <div class='details-datetime-hover'>
               <p>${year}</p>
@@ -84,8 +85,7 @@ const renderMovies = (movies = []) => {
             <p class='castActors_hover'>Actors: ${castActors}</p>
           </div>
       `
-      )
-;
+    );
 
     link.appendChild($clonArticle);
     fragment.appendChild(link);
@@ -97,7 +97,6 @@ const renderMovies = (movies = []) => {
 
 export const renderMovieById = (id) => {
   const movies = getFromBD("movies");
-  console.log(movies);
 
   const movie = movies[id - 1];
   const {
@@ -162,14 +161,10 @@ export const renderMovieById = (id) => {
 const streamingPlatforms = (streamingInfo = []) => {
   const div = document.createElement("div");
   const a = Object.keys(streamingInfo);
-  console.log(a);
-  console.log(streamingInfo);
   Object.keys(streamingInfo).forEach((value) => {
-    console.log(value);
     const link = document.createElement("a");
     link.textContent = value;
     const platformInfo = getUrlPlatform(value);
-    console.log(platformInfo);
     link.href = platformInfo[0];
     link.target = "_blank";
     link.style.backgroundColor = platformInfo[1];
@@ -179,15 +174,13 @@ const streamingPlatforms = (streamingInfo = []) => {
 };
 
 const getUrlPlatform = (key) => {
-  console.log(key);
-
   const valores = platformsLink[key];
-  console.log(valores);
+
   return valores;
 };
 
 // Función para obtener peliculas por el id de genero
-export const getMovieByGenre = async (lang, genreId) => {
+export const getMovieByGenre = async (lang = "en", genreId) => {
   const urlByGenre = `https://streaming-availability.p.rapidapi.com/v2/search/basic?country=us&services=netflix%2Cprime.buy%2Chulu.addon.hbo%2Cpeacock.free&output_language=${lang}&show_type=movie&genre=${genreId}`;
   try {
     const response = await fetch(urlByGenre, options);
@@ -199,13 +192,12 @@ export const getMovieByGenre = async (lang, genreId) => {
   } catch (error) {
     throw new Error("Error en la elección de categorias");
   }
-  getMovieByTitle
 };
 
 export function renderLastSearch() {
   const lastSearch = getFromBD("movies");
   const $titleRenderLastSearch = document.querySelector("#search-result");
-  $titleRenderLastSearch.innerHTML = `Last Results:`
+  $titleRenderLastSearch.innerHTML = `Last Results:`;
 
   if (!lastSearch) {
     return `<h1>You have not performed a search yet</h1>`;

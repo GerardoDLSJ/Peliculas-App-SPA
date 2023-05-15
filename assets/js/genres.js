@@ -1,3 +1,4 @@
+import { getMovieByGenre } from "./movie.js";
 import { options } from "./options.js";
 
 const urlGenres = "https://streaming-availability.p.rapidapi.com/v2/genres";
@@ -12,7 +13,7 @@ export const getGenres = async () => {
     const result = await response.json();
 
     genresMap = result.result;
-    console.log(genresMap);
+
     listGenres(result.result);
   } catch (error) {
     console.error(error);
@@ -40,3 +41,18 @@ function listGenres(list) {
 
   $lista.appendChild($fragment);
 }
+
+export const selectRandomMovies = async () => {
+  const response = await fetch(urlGenres, options);
+
+  const result = await response.json();
+
+  genresMap = result.result;
+
+  const elements = Object.keys(genresMap);
+
+  // Selecciona un genere
+  const genreRandom = elements[Math.floor(Math.random() * elements.length)]; // seleccionamos un elemento aleatorio del arreglo
+
+  return getMovieByGenre("en", genreRandom); // imprimimos el elemento aleatorio seleccionado
+};

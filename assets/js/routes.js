@@ -4,7 +4,7 @@ import {
   renderMovieById,
   renderLastSearch,
 } from "./movie.js";
-import { genresMap } from "./genres.js";
+import { genresMap, selectRandomMovies } from "./genres.js";
 export const router = new Navigo("/", true);
 
 const $main = document.querySelector("#root");
@@ -14,15 +14,19 @@ const history = window.history;
 export function initRouter() {
   $('[data-bs-toggle="popover"]').popover("destroy");
   let { href: currentURL, origin: host } = window.location;
-  console.log("currentURL", currentURL);
-  console.log("host", host);
 
   let currentPath = currentURL.replace(host, "");
-  console.log("currentPath", currentPath);
 
   router.on("/", () => {
     $main.innerHTML = renderLastSearch();
-    
+  });
+
+  // Carga peliculas aleatorias
+  router.on("/index.html", () => {
+    selectRandomMovies().then((result) => {
+      $main.appendChild(result);
+      $('[data-bs-toggle="popover"]').popover();
+    });
   });
 
   // Primera ruta find
@@ -44,7 +48,6 @@ export function initRouter() {
   });
   // Ruta: listar peliculas por genero - id
   router.on("/genre/:genre", ({ data }) => {
-    console.log(data);
     if (!data) {
       $main.textContent = "";
       $main.innerHTML = '<h2 style="margin-top: 100px">Sin resultados<h2>';
@@ -55,10 +58,6 @@ export function initRouter() {
       $main.appendChild(section);
       $('[data-bs-toggle="popover"]').popover();
     });
-    
-    // console.log(genresMap);
-    console.log(data.genre);
-    // history.pushState(null, null, `${currentURL}/${genresMap[data.genre]}`);
   });
 
   // Ruta info imagen
@@ -79,7 +78,6 @@ export function initRouter() {
 
   router.resolve(currentPath);
   //$('[data-bs-toggle="popover"]').popover("destroy")
-  console.log("popover")
-  
+
   $('[data-bs-toggle="popover"]').popover();
 }

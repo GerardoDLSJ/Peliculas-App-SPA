@@ -132,6 +132,7 @@ padding-left: 0;
 
     /* Menu desplegable */
 .main-nav__submenu {
+    columns: 3;
     display: none;
     min-width: 140px;
     position: absolute;
@@ -167,7 +168,7 @@ input:focus {
  /* ----- POSTER DE LA PELICULA-----*/
 .container-movies{
    display: flex;
-   justify-content: space-between;
+   justify-content: center;
    gap: 1rem;
    flex-wrap: wrap;
    max-height: 71vh;
