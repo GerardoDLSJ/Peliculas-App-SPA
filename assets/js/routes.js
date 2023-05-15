@@ -24,7 +24,7 @@ export function initRouter() {
   // Carga peliculas aleatorias
   router.on("/index.html", () => {
     selectRandomMovies().then((result) => {
-      $main.appendChild(result);
+      $main.appendChild(result); 
       $('[data-bs-toggle="popover"]').popover();
     });
   });
