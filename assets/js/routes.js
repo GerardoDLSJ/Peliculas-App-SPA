@@ -41,6 +41,7 @@ export function initRouter() {
             $main.textContent = "";
             $main.appendChild(section);
             $('[data-bs-toggle="popover"]').popover();
+            notReload();
           })
           .catch((err) => {
             console.log("No se pudo cargar la ruta");
