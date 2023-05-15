@@ -69,6 +69,7 @@ export function initRouter() {
     }
 
     $main.innerHTML = renderMovieById(data.id);
+    notReload();
   });
 
   router.notFound(() => {
@@ -80,4 +81,23 @@ export function initRouter() {
   //$('[data-bs-toggle="popover"]').popover("destroy")
 
   $('[data-bs-toggle="popover"]').popover();
+  router.navigate(currentPath);
+
+  function notReload() {
+    document.addEventListener("click", function (event) {
+      // Si el elemento clickeado es un anchor, prevenir la acción por defecto
+      if (
+        event.target.tagName === "A" ||
+        event.target.tagName === "DIV" ||
+        event.target.tagName === "MAIN"
+      ) {
+        event.preventDefault();
+        let { origin: host } = window.location;
+        console.log(host);
+        let currentPath = event.target.href.replace(host, "");
+        console.log(currentPath);
+        router.navigate(currentPath);
+      }
+    });
+  }
 }

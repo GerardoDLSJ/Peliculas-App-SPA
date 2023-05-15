@@ -1,6 +1,6 @@
 import { getGenres } from "./genres.js";
 import { searchMovie } from "./movie.js";
-import { initRouter } from "./routes.js";
+import { initRouter, router } from "./routes.js";
 
 const timeInactive = 2000; // 4 segundos
 
@@ -21,6 +21,18 @@ function addListeners() {
   const $formSearch = document.getElementById("main-search");
   // Cuando detecta el submit llama a la función search movie
   $formSearch.addEventListener("submit", searchMovie);
+
+  document.addEventListener("click", function (event) {
+    // Si el elemento clickeado es un anchor, prevenir la acción por defecto
+    if (event.target.tagName === "A") {
+      event.preventDefault();
+      let { origin: host } = window.location;
+      console.log(host);
+      let currentPath = event.target.href.replace(host, "");
+      console.log(currentPath);
+      router.navigate(currentPath);
+    }
+  });
 }
 
 document.addEventListener("mousemove", () => {
