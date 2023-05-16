@@ -23,6 +23,7 @@ export const searchMovie = (event) => {
   document.title = search;
 
   router.navigate(`/search?q=${search}`);
+  event.target.search.value='';
 };
 
 // TODO: Cargar información completa de la película --> Pagina entera
