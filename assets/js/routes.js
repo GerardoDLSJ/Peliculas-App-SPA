@@ -19,6 +19,7 @@ export function initRouter() {
 
   router.on("/", () => {
     $main.innerHTML = renderLastSearch();
+    $('[data-bs-toggle="popover"]').popover();
     notReload();
   });
 
