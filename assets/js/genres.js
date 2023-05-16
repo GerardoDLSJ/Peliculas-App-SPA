@@ -54,5 +54,5 @@ export const selectRandomMovies = async () => {
   // Selecciona un genere
   const genreRandom = elements[Math.floor(Math.random() * elements.length)]; // seleccionamos un elemento aleatorio del arreglo
 
-  return getMovieByGenre("en", genreRandom); // imprimimos el elemento aleatorio seleccionado
+  return getMovieByGenre("en", genreRandom, true); // imprimimos el elemento aleatorio seleccionado
 };

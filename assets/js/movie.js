@@ -1,7 +1,8 @@
 import { options } from "./options.js";
 import { router } from "./routes.js";
 import { getFromBD, saveMovies } from "./bd.js";
-import { genresMap } from "./genres.js";
+import { genresMap, selectRandomMovies} from "./genres.js";
+import { notReload } from "./routes.js";
 
 const platformsLink = {
   netflix: ["https://www.netflix.com/", "#E50910"],
@@ -180,33 +181,46 @@ const getUrlPlatform = (key) => {
 };
 
 // Función para obtener peliculas por el id de genero
-export const getMovieByGenre = async (lang = "en", genreId) => {
+export const getMovieByGenre = async (lang = "en", genreId, first= false) => {
   const urlByGenre = `https://streaming-availability.p.rapidapi.com/v2/search/basic?country=us&services=netflix%2Cprime.buy%2Chulu.addon.hbo%2Cpeacock.free&output_language=${lang}&show_type=movie&genre=${genreId}`;
   try {
     const response = await fetch(urlByGenre, options);
     const result = await response.json();
     saveMovies(result.result, "movies");
-    document.title = genresMap[genreId];
-    updateSearchTitle(`Genre: ${genresMap[genreId]}`);
+    if(first == true)
+    {
+      updateSearchTitle(`Top Movies`);
+      document.title = `Cine Upnech`;
+    }
+    else
+    {
+      document.title = genresMap[genreId];
+      updateSearchTitle(`Genre: ${genresMap[genreId]}`);
+    }
     return renderMovies(result.result);
   } catch (error) {
-    throw new Error("Error en la elección de categorias");
+    throw new Error("Error en la selección de categorias");
   }
 };
 
 export function renderLastSearch() {
   const lastSearch = getFromBD("movies");
   const $titleRenderLastSearch = document.querySelector("#search-result");
-  $titleRenderLastSearch.innerHTML = `Last Results:`;
+  $titleRenderLastSearch.innerHTML = `Top Movies`;
 
   if (!lastSearch) {
-    return `<h1>You have not performed a search yet</h1>`;
+      selectRandomMovies().then((result) => {
+      const $main = document.querySelector("#root");
+      $main.appendChild(result);
+      $('[data-bs-toggle="popover"]').popover();
+      notReload();
+    });
+    return ``;
   }
+  document.title = `Cine Upnech`;
   return `
           <div class="container-movies">
                 ${renderMovies(lastSearch).innerHTML}
           </div>`;
 }
-// $(function () {
-//   $('[data-bs-toggle="popover"]').popover();
-// })
+

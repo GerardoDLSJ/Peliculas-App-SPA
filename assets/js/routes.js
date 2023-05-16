@@ -22,15 +22,6 @@ export function initRouter() {
     notReload();
   });
 
-  // Carga peliculas aleatorias
-  router.on("/index.html", () => {
-    selectRandomMovies().then((result) => {
-      $main.appendChild(result);
-      $('[data-bs-toggle="popover"]').popover();
-      notReload();
-    });
-  });
-
   // Primera ruta search
   router.on("/search", ({ data, params, queryString }) => {
     if (params) {
@@ -90,7 +81,7 @@ export function initRouter() {
   // router.navigate(currentPath);
 }
 // Evitar que se recargue;
-function notReload() {
+export function notReload() {
   console.log("hola");
   const anchors = document.querySelectorAll(".container-movies a");
   for (var i = 0; i < anchors.length; i++) {

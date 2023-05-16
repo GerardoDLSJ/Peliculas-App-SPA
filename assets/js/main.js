@@ -2,6 +2,7 @@ import { getGenres } from "./genres.js";
 import { searchMovie } from "./movie.js";
 import { initRouter, router } from "./routes.js";
 
+
 const timeInactive = 2000; // 4 segundos
 
 // establece el temporizador
